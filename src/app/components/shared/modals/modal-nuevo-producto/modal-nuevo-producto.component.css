@@ -7,3 +7,14 @@
 .blue {
     color: rgb(76, 73, 255);
 }
+
+.thumbnail {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
+
+.thumbnail img {
+    max-height: 100%;
+    max-width: 100%;  
+}

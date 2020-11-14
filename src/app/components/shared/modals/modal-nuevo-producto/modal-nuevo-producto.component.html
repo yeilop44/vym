@@ -29,10 +29,9 @@
                     <input type="text" class="form-control" placeholder="Precio" #price>
                 </div>
             </div>
-        </div>                                       
-        
+        </div>                                               
         <div class="form-row" *ngFor="let item of availability; let i = index">          
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 <div class="form-group">                  
                     <input type="text" class="form-control" placeholder="Talla" name="sizeAvailability{{i}}" [(ngModel)]="item.sizeAvailability">                              
                 </div>
@@ -42,14 +41,19 @@
                     <input type="text" class="form-control" placeholder="Cantidad" name="quantityAvailability{{i}}" [(ngModel)]="item.quantityAvailability">                              
                 </div>
             </div>
-            <div class="form-group col-md-1">
-                <button  class="btn btn-primary buttonHiddenShow" style="border-radius: 50%; margin-right: 10px;" (click)="addField(item)">
+            <div class="form-group col-md-2">
+                <button  class="btn btn-primary buttonHiddenShow" style="border-radius: 50%; margin-right: 10px;" (click)="addField(item)" *ngIf="i==availability.length-1">
                 <i class="fas fa-plus"></i>
-                </button>                                        
+                </button>
+                <button  class="btn btn-primary buttonHiddenShow" style="border-radius: 50%;" (click)="deleteField(i)" *ngIf="(availability.length)>1">
+                    <i class="fas fa-minus"></i>
+                  </button>                                        
             </div>    
         </div>        
-        <div class="form-group">
-          <img [src]="photoSelected" class="card-img-top" alt="..." *ngIf="photoSelected"> 
+        <div class="form-group col-md-5">
+            <div class="thumbnail" *ngIf="photoSelected">
+                <img [src]="photoSelected" class="card-img-top" alt="..." *ngIf="photoSelected"> 
+            </div>          
         </div>
         <div class="form-group">          
           <input type="file" style="display: none;" (change)="selectImage($event)" #photoInput class="form-control-file" id="exampleFormControlFile1">

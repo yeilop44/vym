@@ -25,7 +25,7 @@ export class AdministrarComponent implements OnInit {
   openModalNuevoProducto(){ 
     this.bsModalRef = this.modalService.show( ModalNuevoProductoComponent , { class: 'gray modal-lg'} );
     this.bsModalRef.content.messageEvent.subscribe(data => {
-      console.log('Child component\'s event was triggered:', data); 
+      //console.log('Child component\'s event was triggered:', data); 
       this.getProducts();            
     });      
     this.bsModalRef.content.closeBtnName = 'Close';

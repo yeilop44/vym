@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ProductsService } from '../../../../services/products.service';
 
@@ -16,6 +16,8 @@ export class ModalNuevoProductoComponent implements OnInit {
   file: File;
   photoSelected: string | ArrayBuffer
 
+  @Output() messageEvent = new EventEmitter<object>();
+
   constructor(public bsModalRef: BsModalRef, private productsService: ProductsService) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class ModalNuevoProductoComponent implements OnInit {
   selectImage(event){
     if(event.target.files){
       this.file = event.target.files[0];
-      console.log(this.file);
+      // console.log(this.file);
       //image preview
       const reader = new FileReader();
       reader.onload = e =>  this.photoSelected = reader.result;
@@ -33,15 +35,21 @@ export class ModalNuevoProductoComponent implements OnInit {
   }
 
   createProduct(name: HTMLInputElement, category: HTMLInputElement, sex: HTMLInputElement, price: HTMLInputElement): boolean{
-    //console.log(this.availability);
+    
+    let producto: object = {
+      name: name.value,
+      category: category.value,
+      sex: sex.value     
+    } 
+    
      this.productsService.postProduct(name.value, category.value, sex.value, price.value as any, this.availability as any, this.file )
-       .subscribe(res => {
-         //console.log(res);          
+       .subscribe(data => {         
+         this.bsModalRef.hide();   
+         this.messageEvent.emit(producto);       
        }, err => {
          console.log(err);
        });
-     return false;
-     this.bsModalRef.hide();    
+     return false;        
   }
    
   addField(){
@@ -49,6 +57,11 @@ export class ModalNuevoProductoComponent implements OnInit {
      sizeAvailability: "",
      quantityAvailability: ""
     });
+  }
+
+
+  deleteField(i){
+    this.availability.splice(i,1);    
   }
 
 }
