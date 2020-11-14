@@ -1,0 +1,23 @@
+.thumbnail {
+    height: 100px;
+}
+
+.thumbnail img {
+    max-height: 100%;
+    max-width: 100%;  
+}
+
+.size {
+    margin-right: 10px; 
+    background-color: rgb(231, 231, 231); 
+    text-transform: capitalize;  
+    width: 28px;
+    height: 28px;
+}
+
+.quantity {
+    margin-right: 10px;  
+    text-transform: capitalize;  
+    width: 28px;
+    height: 28px;
+}

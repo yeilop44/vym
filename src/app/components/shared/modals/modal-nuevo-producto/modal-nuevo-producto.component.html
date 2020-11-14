@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h6 class="modal-title pull-left">Nuevo Producto</h6>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (submit)="createProduct(name, category, sex, price)"> 
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <div class="form-group">    
+                    <input type="text" class="form-control" placeholder="Nombre" #name>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-group">        
+                    <input type="text" class="form-control" placeholder="Categoria" #category>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <div class="form-group">        
+                    <input type="text" class="form-control" placeholder="Sexo" #sex>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-group">        
+                    <input type="text" class="form-control" placeholder="Precio" #price>
+                </div>
+            </div>
+        </div>                                       
+        
+        <div class="form-row" *ngFor="let item of availability; let i = index">          
+            <div class="form-group col-md-6">
+                <div class="form-group">                  
+                    <input type="text" class="form-control" placeholder="Talla" name="sizeAvailability{{i}}" [(ngModel)]="item.sizeAvailability">                              
+                </div>
+            </div>
+            <div class="form-group col-md-5">
+                <div class="form-group">                  
+                    <input type="text" class="form-control" placeholder="Cantidad" name="quantityAvailability{{i}}" [(ngModel)]="item.quantityAvailability">                              
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <button  class="btn btn-primary buttonHiddenShow" style="border-radius: 50%; margin-right: 10px;" (click)="addField(item)">
+                <i class="fas fa-plus"></i>
+                </button>                                        
+            </div>    
+        </div>        
+        <div class="form-group">
+          <img [src]="photoSelected" class="card-img-top" alt="..." *ngIf="photoSelected"> 
+        </div>
+        <div class="form-group">          
+          <input type="file" style="display: none;" (change)="selectImage($event)" #photoInput class="form-control-file" id="exampleFormControlFile1">
+          <div class="col-3" style="margin-left: 0px; cursor: pointer; ">
+            <div class="contact rounded-circle" style="padding-left: 7px; padding-top: 6px" (click)="photoInput.click()">
+              <span><i class="far fa-image fa-lg blue"></i></span>
+            </div>
+          </div>                       
+        </div>                 
+          <button class="btn btn-primary btn-block" *ngIf="photoSelected">Guardar</button>        
+    </form>       
+  </div>

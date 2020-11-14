@@ -1,0 +1,13 @@
+<div class="row" >
+  <div class="col-md-3 mb-2 containe" *ngFor="let product of womanProducts"> 
+    <div class="card-group">
+      <div class="card hand">
+        <img [src]="urlImage + product.productImage" class="card-img-top">
+        <div class="card-body">
+          <h6 class="card-title capitalize">{{ product.name }}</h6>          
+          <p class="card-text"><small class="text-muted">{{ product.price | currency: 'COP': 'symbol-narrow' }}</small></p>
+        </div>
+      </div>                
+    </div>
+  </div>
+</div>   

@@ -1,0 +1,51 @@
+
+<button type="button" class="btn btn-primary align" style="margin-bottom: 15px;" (click)="openModalNuevoProducto()">
+  <i class="fas fa-plus"></i> Nuevo
+</button>
+
+<table class="table table-hover mt-3">
+    <thead>
+      <tr>   
+        <th scope="col"></th>
+        <th scope="col">Producto</th>
+        <th scope="col">Sexo</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Disponibilidad</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td class="w-5 thumbnail">
+          <img [src]="urlImage + product.productImage"  alt="">          
+        </td> 
+        <td>{{ product.name }}</td> 
+        <td>{{ product.sex }}</td>
+        <td>{{  product.category }}</td>
+        <td>{{ product.price | currency: 'COP': 'symbol-narrow' }}</td>
+        <td>  
+          <div class="row">
+            <div *ngFor="let availability of product.availability">  
+              <div class="text-center size rounded-circle"> 
+                <span>{{ availability.sizeAvailability }}</span> 
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div *ngFor="let availability of product.availability">  
+              <div class="text-center quantity rounded-circle"> 
+                <span>{{ availability.quantityAvailability }}</span> 
+              </div>
+            </div>
+          </div>                                          
+        </td>
+        <td>
+          <button type="button" class="btn btn-outline-danger" (click)="deleteProduct(product._id)">
+            <i class="fas fa-trash"></i>
+          </button>            
+        </td>
+      </tr>          
+    </tbody>
+</table>
+
